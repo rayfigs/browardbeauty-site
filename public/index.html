@@ -96,21 +96,16 @@
       color: var(--white);
       padding: 0 20px;
     }
-    .carousel-wrapper {
-      overflow: hidden;
-      padding: 0 20px 16px;
-    }
     .carousel {
       display: flex;
       gap: 16px;
-      animation: scroll 20s linear infinite;
-      width: max-content;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 20px 16px;
+      scrollbar-width: none;
     }
-    .carousel:hover { animation-play-state: paused; }
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+    .carousel::-webkit-scrollbar { display: none; }
     .video-card {
       flex-shrink: 0;
       width: 220px;
@@ -219,7 +214,6 @@
 
   <div class="videos-section">
     <h2>Watch a Story Like Yours</h2>
-    <div class="carousel-wrapper">
     <div class="carousel">
       <a class="video-card" href="/1">
         <div class="thumb">
@@ -276,63 +270,6 @@
           <div class="avatar-name">David's Story</div>
         </div>
       </a>
-      <!-- Duplicate set for seamless loop -->
-      <a class="video-card" href="/1">
-        <div class="thumb">
-          <img src="/thumbs/1.jpg" alt="Jordan Martinez" loading="lazy">
-          <div class="num">1</div>
-          <div class="play-overlay"></div>
-        </div>
-        <div class="card-info">
-          <h3>What If College Is the Blind Spot?</h3>
-          <div class="avatar-name">Jordan's Story</div>
-        </div>
-      </a>
-      <a class="video-card" href="/2">
-        <div class="thumb">
-          <img src="/thumbs/2.jpg" alt="Destiny Jackson" loading="lazy">
-          <div class="num">2</div>
-          <div class="play-overlay"></div>
-        </div>
-        <div class="card-info">
-          <h3>My Mom Works Two Jobs. I Need to Help Her Now.</h3>
-          <div class="avatar-name">Destiny's Story</div>
-        </div>
-      </a>
-      <a class="video-card" href="/3">
-        <div class="thumb">
-          <img src="/thumbs/3.jpg" alt="Sophia Rodriguez" loading="lazy">
-          <div class="num">3</div>
-          <div class="play-overlay"></div>
-        </div>
-        <div class="card-info">
-          <h3>What If I Pick the Wrong Major and Waste Everything?</h3>
-          <div class="avatar-name">Sophia's Story</div>
-        </div>
-      </a>
-      <a class="video-card" href="/4">
-        <div class="thumb">
-          <img src="/thumbs/4.jpg" alt="Maria Santos" loading="lazy">
-          <div class="num">4</div>
-          <div class="play-overlay"></div>
-        </div>
-        <div class="card-info">
-          <h3>I Work Two Jobs and Still Can't Afford College for My Son.</h3>
-          <div class="avatar-name">Maria's Story</div>
-        </div>
-      </a>
-      <a class="video-card" href="/5">
-        <div class="thumb">
-          <img src="/thumbs/5.jpg" alt="David Martinez" loading="lazy">
-          <div class="num">5</div>
-          <div class="play-overlay"></div>
-        </div>
-        <div class="card-info">
-          <h3>My Wife Wants College. I Want Real Skills for Our Son.</h3>
-          <div class="avatar-name">David's Story</div>
-        </div>
-      </a>
-    </div>
     </div>
   </div>
 
@@ -343,6 +280,55 @@
   <div class="site-footer">
     &copy; 2026 JT Cuts Academy &middot; Broward County, FL
   </div>
+
+  <script>
+    (function() {
+      var carousel = document.querySelector('.carousel');
+      var cards = carousel.querySelectorAll('.video-card');
+      var index = 0;
+      var paused = false;
+      var resumeTimer;
+
+      function scrollToCard(i) {
+        cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      }
+
+      // Auto-advance every 3 seconds
+      setInterval(function() {
+        if (paused) return;
+        index++;
+        if (index >= cards.length) {
+          index = 0;
+          // Jump back to start instantly, then smooth-scroll to card 1
+          carousel.scrollLeft = 0;
+          setTimeout(function() {
+            index = 1;
+            scrollToCard(1);
+          }, 50);
+          return;
+        }
+        scrollToCard(index);
+      }, 3000);
+
+      // Pause on any touch interaction, resume after idle
+      function pauseAutoScroll() {
+        paused = true;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function() { paused = false; }, 6000);
+      }
+
+      carousel.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+      carousel.addEventListener('touchmove', pauseAutoScroll, { passive: true });
+      carousel.addEventListener('scroll', function() {
+        if (!paused) return;
+        // Update index based on scroll position
+        var scrollPos = carousel.scrollLeft;
+        var cardWidth = cards[0].offsetWidth + 16;
+        index = Math.round(scrollPos / cardWidth);
+        if (index >= cards.length) index = cards.length - 1;
+      }, { passive: true });
+    })();
+  </script>
 
 </body>
 </html>

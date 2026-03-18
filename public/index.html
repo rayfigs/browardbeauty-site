@@ -83,11 +83,9 @@
     .hero-cta:hover { background: var(--primary-dark); }
     .hero-cta:active { transform: scale(0.98); }
 
-    /* Videos section */
+    /* Videos carousel section */
     .videos-section {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 32px 20px 48px;
+      padding: 32px 0 48px;
     }
     .videos-section h2 {
       font-family: 'Roboto Slab', serif;
@@ -96,30 +94,52 @@
       text-align: center;
       margin-bottom: 24px;
       color: var(--white);
+      padding: 0 20px;
     }
-    .video-cards {
+    .carousel-wrapper {
+      overflow: hidden;
+      padding: 0 20px 16px;
+    }
+    .carousel {
       display: flex;
-      flex-direction: column;
       gap: 16px;
+      animation: scroll 20s linear infinite;
+      width: max-content;
+    }
+    .carousel:hover { animation-play-state: paused; }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     .video-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 12px;
-      padding: 16px;
+      flex-shrink: 0;
+      width: 220px;
       text-decoration: none;
       color: var(--white);
-      transition: background 0.2s;
+      scroll-snap-align: start;
+      transition: transform 0.2s;
     }
-    .video-card:hover {
-      background: rgba(255,255,255,0.1);
+    .video-card:hover { transform: scale(1.03); }
+    .video-card .thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9/16;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #222;
+      margin-bottom: 12px;
     }
-    .video-card .num {
-      flex-shrink: 0;
-      width: 48px;
-      height: 48px;
+    .video-card .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .video-card .thumb .num {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: var(--primary);
       color: var(--darker);
@@ -127,17 +147,36 @@
       align-items: center;
       justify-content: center;
       font-family: 'Roboto Slab', serif;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 800;
     }
-    .video-card .info h3 {
-      font-size: 15px;
+    .video-card .thumb .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .video-card:hover .play-overlay { opacity: 1; }
+    .video-card .thumb .play-overlay::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 16px 0 16px 28px;
+      border-color: transparent transparent transparent white;
+    }
+    .video-card .card-info h3 {
+      font-size: 14px;
       font-weight: 700;
       line-height: 1.3;
       margin-bottom: 4px;
     }
-    .video-card .info .avatar-name {
-      font-size: 13px;
+    .video-card .card-info .avatar-name {
+      font-size: 12px;
       color: #999;
     }
 
@@ -180,42 +219,120 @@
 
   <div class="videos-section">
     <h2>Watch a Story Like Yours</h2>
-    <div class="video-cards">
+    <div class="carousel-wrapper">
+    <div class="carousel">
       <a class="video-card" href="/1">
-        <div class="num">1</div>
-        <div class="info">
+        <div class="thumb">
+          <img src="/thumbs/1.jpg" alt="Jordan Martinez" loading="lazy">
+          <div class="num">1</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
           <h3>What If College Is the Blind Spot?</h3>
           <div class="avatar-name">Jordan's Story</div>
         </div>
       </a>
       <a class="video-card" href="/2">
-        <div class="num">2</div>
-        <div class="info">
+        <div class="thumb">
+          <img src="/thumbs/2.jpg" alt="Destiny Jackson" loading="lazy">
+          <div class="num">2</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
           <h3>My Mom Works Two Jobs. I Need to Help Her Now.</h3>
           <div class="avatar-name">Destiny's Story</div>
         </div>
       </a>
       <a class="video-card" href="/3">
-        <div class="num">3</div>
-        <div class="info">
+        <div class="thumb">
+          <img src="/thumbs/3.jpg" alt="Sophia Rodriguez" loading="lazy">
+          <div class="num">3</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
           <h3>What If I Pick the Wrong Major and Waste Everything?</h3>
           <div class="avatar-name">Sophia's Story</div>
         </div>
       </a>
       <a class="video-card" href="/4">
-        <div class="num">4</div>
-        <div class="info">
+        <div class="thumb">
+          <img src="/thumbs/4.jpg" alt="Maria Santos" loading="lazy">
+          <div class="num">4</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
           <h3>I Work Two Jobs and Still Can't Afford College for My Son.</h3>
           <div class="avatar-name">Maria's Story</div>
         </div>
       </a>
       <a class="video-card" href="/5">
-        <div class="num">5</div>
-        <div class="info">
+        <div class="thumb">
+          <img src="/thumbs/5.jpg" alt="David Martinez" loading="lazy">
+          <div class="num">5</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
           <h3>My Wife Wants College. I Want Real Skills for Our Son.</h3>
           <div class="avatar-name">David's Story</div>
         </div>
       </a>
+      <!-- Duplicate set for seamless loop -->
+      <a class="video-card" href="/1">
+        <div class="thumb">
+          <img src="/thumbs/1.jpg" alt="Jordan Martinez" loading="lazy">
+          <div class="num">1</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
+          <h3>What If College Is the Blind Spot?</h3>
+          <div class="avatar-name">Jordan's Story</div>
+        </div>
+      </a>
+      <a class="video-card" href="/2">
+        <div class="thumb">
+          <img src="/thumbs/2.jpg" alt="Destiny Jackson" loading="lazy">
+          <div class="num">2</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
+          <h3>My Mom Works Two Jobs. I Need to Help Her Now.</h3>
+          <div class="avatar-name">Destiny's Story</div>
+        </div>
+      </a>
+      <a class="video-card" href="/3">
+        <div class="thumb">
+          <img src="/thumbs/3.jpg" alt="Sophia Rodriguez" loading="lazy">
+          <div class="num">3</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
+          <h3>What If I Pick the Wrong Major and Waste Everything?</h3>
+          <div class="avatar-name">Sophia's Story</div>
+        </div>
+      </a>
+      <a class="video-card" href="/4">
+        <div class="thumb">
+          <img src="/thumbs/4.jpg" alt="Maria Santos" loading="lazy">
+          <div class="num">4</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
+          <h3>I Work Two Jobs and Still Can't Afford College for My Son.</h3>
+          <div class="avatar-name">Maria's Story</div>
+        </div>
+      </a>
+      <a class="video-card" href="/5">
+        <div class="thumb">
+          <img src="/thumbs/5.jpg" alt="David Martinez" loading="lazy">
+          <div class="num">5</div>
+          <div class="play-overlay"></div>
+        </div>
+        <div class="card-info">
+          <h3>My Wife Wants College. I Want Real Skills for Our Son.</h3>
+          <div class="avatar-name">David's Story</div>
+        </div>
+      </a>
+    </div>
     </div>
   </div>
 

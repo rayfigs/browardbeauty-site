@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What If I Pick the Wrong Major? — JT Cuts Academy</title>
+  <meta name="description" content="Watch this 60-second video and discover the career path nobody told you about.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto+Slab:wght@700;800&display=swap" rel="stylesheet">
+  <script src="/shared/pixels.js" defer></script>
+  <style>
+    :root {
+      --primary: #FFCB02;
+      --primary-dark: #E6B800;
+      --dark: #333C4E;
+      --darker: #3A3533;
+      --accent: #005DA7;
+      --rust: #A62215;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Open Sans', -apple-system, sans-serif;
+      background: var(--darker);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header {
+      text-align: center;
+      padding: 24px 20px 12px;
+      width: 100%;
+      max-width: 480px;
+    }
+    .header .brand {
+      font-family: 'Roboto Slab', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-family: 'Roboto Slab', serif;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.3;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .header p { font-size: 14px; color: #aaa; }
+    .video-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 0 16px;
+      margin: 16px 0;
+      position: relative;
+    }
+    .video-container iframe {
+      width: 100%;
+      aspect-ratio: 9/16;
+      border-radius: 12px;
+      background: #222;
+      border: none;
+    }
+    .cta-section {
+      width: 100%;
+      max-width: 480px;
+      padding: 0 16px 40px;
+      text-align: center;
+    }
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      background: var(--primary);
+      color: var(--darker);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      text-decoration: none;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, opacity 0.4s;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .cta-btn.visible { opacity: 1; pointer-events: auto; }
+    .cta-btn:hover { background: var(--primary-dark); }
+    .cta-btn:active { transform: scale(0.98); }
+    .cta-sub {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #888;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .cta-sub.visible { opacity: 1; }
+    .countdown-bar { display: none; margin-top: 20px; text-align: center; }
+    .countdown-bar.active { display: block; }
+    .countdown-text { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 10px; }
+    .countdown-track { width: 100%; height: 6px; background: rgba(255,255,255,0.15); border-radius: 3px; overflow: hidden; }
+    .countdown-fill { height: 100%; background: var(--primary); border-radius: 3px; transition: width 1s linear; }
+    .footer { margin-top: auto; padding: 20px; text-align: center; font-size: 11px; color: #555; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">JT Cuts Academy</div>
+    <h1>What If I Pick the Wrong Major and Waste Everything?</h1>
+    <p>Watch this 60-second video. It might change everything.</p>
+  </div>
+
+  <div class="video-container">
+    <iframe id="video" src="https://share.descript.com/embed/WfATMjKBOJO?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+
+  <div class="cta-section">
+    <a class="cta-btn" id="ctaBtn" href="/quiz?hook=blindspot&src=video-3">
+      Take the 60-Second Career Quiz
+    </a>
+    <p class="cta-sub" id="ctaSub">Free. No signup required. Get your personalized report instantly.</p>
+    <div class="countdown-bar" id="countdownBar">
+      <div class="countdown-text">Redirecting to the quiz in <span id="countdown">10</span>s...</div>
+      <div class="countdown-track">
+        <div class="countdown-fill" id="countdownFill" style="width: 100%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">&copy; 2026 JT Cuts Academy &middot; Broward County, FL</div>
+
+  <script>
+    (function() {
+      var quizUrl = '/quiz?hook=blindspot&src=video-3';
+      var ctaBtn = document.getElementById('ctaBtn');
+      var ctaSub = document.getElementById('ctaSub');
+      var countdownBar = document.getElementById('countdownBar');
+      var countdownEl = document.getElementById('countdown');
+      var countdownFill = document.getElementById('countdownFill');
+
+      setTimeout(function() {
+        ctaBtn.classList.add('visible');
+        ctaSub.classList.add('visible');
+      }, 28000);
+
+      setTimeout(function() {
+        ctaBtn.classList.add('visible');
+        ctaSub.classList.add('visible');
+        startCountdown();
+      }, 38000);
+
+      function startCountdown() {
+        countdownBar.classList.add('active');
+        var seconds = 10;
+        countdownEl.textContent = seconds;
+        requestAnimationFrame(function() { countdownFill.style.width = '0%'; });
+        var interval = setInterval(function() {
+          seconds--;
+          countdownEl.textContent = seconds;
+          if (seconds <= 0) { clearInterval(interval); window.location.href = quizUrl; }
+        }, 1000);
+        ctaBtn.addEventListener('click', function() { clearInterval(interval); });
+      }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broward Beauty — JT Cuts Academy</title>
+  <meta name="description" content="Discover your career path. Watch real stories and take the free 60-second career quiz.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto+Slab:wght@700;800&display=swap" rel="stylesheet">
+  <script src="/shared/pixels.js" defer></script>
+  <style>
+    :root {
+      --primary: #FFCB02;
+      --primary-dark: #E6B800;
+      --dark: #333C4E;
+      --darker: #3A3533;
+      --accent: #005DA7;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Open Sans', -apple-system, sans-serif;
+      background: var(--darker);
+      color: var(--white);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .site-header {
+      text-align: center;
+      padding: 32px 20px 16px;
+    }
+    .site-header .brand {
+      font-family: 'Roboto Slab', serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .site-header .location {
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 32px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-family: 'Roboto Slab', serif;
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.3;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .hero h1 span {
+      color: var(--primary);
+    }
+    .hero p {
+      font-size: 16px;
+      color: #bbb;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 18px 40px;
+      background: var(--primary);
+      color: var(--darker);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .hero-cta:hover { background: var(--primary-dark); }
+    .hero-cta:active { transform: scale(0.98); }
+
+    /* Videos section */
+    .videos-section {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    .videos-section h2 {
+      font-family: 'Roboto Slab', serif;
+      font-size: 20px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 24px;
+      color: var(--white);
+    }
+    .video-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .video-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 16px;
+      text-decoration: none;
+      color: var(--white);
+      transition: background 0.2s;
+    }
+    .video-card:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .video-card .num {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--darker);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Roboto Slab', serif;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .video-card .info h3 {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .video-card .info .avatar-name {
+      font-size: 13px;
+      color: #999;
+    }
+
+    /* Event banner */
+    .event-banner {
+      background: var(--dark);
+      text-align: center;
+      padding: 24px 20px;
+    }
+    .event-banner p {
+      font-size: 14px;
+      color: #bbb;
+      line-height: 1.6;
+    }
+    .event-banner strong {
+      color: var(--primary);
+    }
+
+    /* Footer */
+    .site-footer {
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 11px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="site-header">
+    <div class="brand">JT Cuts Academy</div>
+    <div class="location">Broward County, FL</div>
+  </div>
+
+  <div class="hero">
+    <h1>Discover Your <span>#1 Career Path</span> Blind Spot</h1>
+    <p>Take the free 60-second quiz and get a personalized career report — or watch a short video that might change everything.</p>
+    <a class="hero-cta" href="/quiz">Take the Free Career Quiz</a>
+  </div>
+
+  <div class="videos-section">
+    <h2>Watch a Story Like Yours</h2>
+    <div class="video-cards">
+      <a class="video-card" href="/1">
+        <div class="num">1</div>
+        <div class="info">
+          <h3>What If College Is the Blind Spot?</h3>
+          <div class="avatar-name">Jordan's Story</div>
+        </div>
+      </a>
+      <a class="video-card" href="/2">
+        <div class="num">2</div>
+        <div class="info">
+          <h3>My Mom Works Two Jobs. I Need to Help Her Now.</h3>
+          <div class="avatar-name">Destiny's Story</div>
+        </div>
+      </a>
+      <a class="video-card" href="/3">
+        <div class="num">3</div>
+        <div class="info">
+          <h3>What If I Pick the Wrong Major and Waste Everything?</h3>
+          <div class="avatar-name">Sophia's Story</div>
+        </div>
+      </a>
+      <a class="video-card" href="/4">
+        <div class="num">4</div>
+        <div class="info">
+          <h3>I Work Two Jobs and Still Can't Afford College for My Son.</h3>
+          <div class="avatar-name">Maria's Story</div>
+        </div>
+      </a>
+      <a class="video-card" href="/5">
+        <div class="num">5</div>
+        <div class="info">
+          <h3>My Wife Wants College. I Want Real Skills for Our Son.</h3>
+          <div class="avatar-name">David's Story</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="event-banner">
+    <p><strong>College, Careers & Beyond</strong> Job Fair<br>March 18 & 20, 2026 — HEART Community Resource Center, Lauderdale Lakes, FL</p>
+  </div>
+
+  <div class="site-footer">
+    &copy; 2026 JT Cuts Academy &middot; Broward County, FL
+  </div>
+
+</body>
+</html>

@@ -114,6 +114,23 @@
       scroll-snap-align: start;
       transition: transform 0.2s;
     }
+
+    /* Desktop: center the carousel and use a grid layout */
+    @media (min-width: 768px) {
+      .carousel {
+        overflow-x: visible;
+        scroll-snap-type: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px 16px;
+      }
+      .video-card {
+        scroll-snap-align: unset;
+        width: 240px;
+      }
+    }
     .video-card:hover { transform: scale(1.03); }
     .video-card .thumb {
       position: relative;
@@ -293,7 +310,8 @@
         cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
       }
 
-      // Auto-advance every 3 seconds
+      // Only auto-advance on mobile (carousel scrolls)
+      if (window.innerWidth >= 768) return;
       setInterval(function() {
         if (paused) return;
         index++;
